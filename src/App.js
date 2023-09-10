@@ -27,16 +27,16 @@ function App() {
     <Router>
       <TopBar />
       <Routes>
-        <Route path="/invoices/:id" element={Invoices} />
-        <Route path="/checkout" element={Checkout} />
-        <Route path="/account" element={Account} />
-        <Route path="/cart" element={Cart} />
-        <Route path="/register" element={Register} />
+        <Route path="/invoices/:id" element={<Invoices />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/account/*" element={<Account />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/register" element={<Register />} />
         <Route
           path="/login"
           element={auth.user ? <Navigate to="/" /> : <Login />}
         />
-        <Route path="/" element={Home} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </Router>
   );

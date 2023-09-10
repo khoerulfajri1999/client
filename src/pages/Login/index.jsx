@@ -37,7 +37,7 @@ export default function Login() {
     } else {
       const { user, token } = data;
       dispatch(userLogin({user, token}));
-      history.push('/');
+      history('/');
     }
     setStatus(statusList.success);
   }

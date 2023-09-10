@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, Container, Button } from 'react-bootstrap'
 import DataTable from 'react-data-table-component';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes, useNavigate, useMatch } from 'react-router';
+import { Route, Routes, useNavigate } from 'react-router';
 import { getAddress } from '../../app/api/address';
 import { createOrder } from '../../app/api/order';
 import { clearItem } from '../../app/features/Cart/actions';
@@ -45,7 +45,7 @@ const AddressData = ({setAddressData}) => {
       title="Pilih Alamat Pengiriman"
     />
     <div className="d-flex justify-content-end mt-3">
-      <Button variant="primary" size="sm" disabled={notSelect} onClick={_ => history.push('/checkout/confirm')}>Selanjutnya</Button>
+      <Button variant="primary" size="sm" disabled={notSelect} onClick={_ => history('/checkout/confirm')}>Selanjutnya</Button>
     </div>
   </>
 }
@@ -77,14 +77,13 @@ const Confirmation = ({data, onClick}) => {
       data={confirm}
     />
     <div className="d-flex justify-content-between mt-3">
-      <Button variant="primary" size="sm" onClick={_ => history.push('/checkout')}>Sebelumnya</Button>
+      <Button variant="primary" size="sm" onClick={_ => history('/checkout')}>Sebelumnya</Button>
       <Button variant="success" size="sm" onClick={onClick}>BAYAR</Button>
     </div>
   </>
 }
 
 export default function Checkout() {
-  const match = useMatch();
   const [selectedAddress, setSelectedAddress] = useState({});
   const dispatch = useDispatch();
   const history = useNavigate();
@@ -98,7 +97,7 @@ export default function Checkout() {
     const { data } = await createOrder(payload);
     if(!data.error) {
       dispatch(clearItem());
-      history.push(`/invoices/${data._id}`);
+      history(`/invoices/${data._id}`);
     }
   }
 
@@ -110,12 +109,8 @@ export default function Checkout() {
         </Card.Header>
         <Card.Body>
           <Routes>
-            <Route path={`${match.url}/`} exact>
-              <AddressData setAddressData={address => setSelectedAddress(address)}/>
-            </Route>
-            <Route path={`${match.url}/confirm`} exact>
-              <Confirmation data={selectedAddress} onClick={handleCreateOrder}/>
-            </Route>
+            <Route path="" element={<AddressData setAddressData={address => setSelectedAddress(address)}/>}exact />
+            <Route path="confirm" element={<Confirmation data={selectedAddress} onClick={handleCreateOrder}/>}exact />
           </Routes>
         </Card.Body>
       </Card>

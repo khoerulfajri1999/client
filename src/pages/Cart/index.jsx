@@ -69,7 +69,7 @@ export default function Cart() {
         <Card.Footer>
         <div className="d-grid gap-2">
           { cart.length > 0 && auth.user ? 
-          <Button variant="primary" size="md" onClick={_ => history.push('/checkout')}>
+          <Button variant="primary" size="md" onClick={_ => history('/checkout')}>
             Checkout
           </Button> : null
           }

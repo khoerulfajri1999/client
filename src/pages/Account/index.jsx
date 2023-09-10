@@ -1,15 +1,17 @@
 import React from 'react'
 import { Card, Col, Container, ListGroup, Row } from 'react-bootstrap'
-import { Route, Routes, useMatch } from 'react-router'
+import { Route, Routes, useMatch, useResolvedPath } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
 import AddAddress from '../../components/AddAddress';
 import Address from '../../components/Address';
 import Order from '../../components/Order';
 import Profile from '../../components/Profile';
 import Logout from '../../components/Logout';
+import { Link } from 'react-router-dom';
 
 export default function Account() {
-  const match = useMatch();
+  const resolved = useResolvedPath('');
+  const match = useMatch(resolved.pathname);
 
   return (
     <Container className="mt-5 p-5">
@@ -21,16 +23,16 @@ export default function Account() {
           <Row>
             <Col md={3}>
               <ListGroup>
-                <LinkContainer to="/account" exact>
+                <Link to="/account" exact>
                   <ListGroup.Item action>
                     Profil
                   </ListGroup.Item>
-                </LinkContainer>
-                <LinkContainer to="/account/orders" exact>
+                </Link>
+                <Link to="/account/orders" exact>
                   <ListGroup.Item action>
                     Pemesanan
                   </ListGroup.Item>
-                </LinkContainer>
+                </Link>
                 <LinkContainer to="/account/address" exact>
                   <ListGroup.Item action>
                     Alamat

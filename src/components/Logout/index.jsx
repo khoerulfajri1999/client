@@ -11,7 +11,7 @@ export default function Logout() {
   useEffect(() => {
     logoutUser()
     .then(_ => dispatch(userLogout()))
-    .then(_ => history.push('/'));
+    .then(_ => history.pushState('/'));
   }, [dispatch, history])
   return (
     <div className="d-flex justify-content-center">
