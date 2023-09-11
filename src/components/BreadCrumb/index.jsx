@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Breadcrumb } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 function BreadCrumb({items}) {
-  const history = useNavigate();
+  const history = useHistory();
 
   return (
     <Breadcrumb>

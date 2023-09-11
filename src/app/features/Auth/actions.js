@@ -1,10 +1,11 @@
-import { USER_LOGIN, USER_LOGOUT } from "./constants";
+import { USER_LOGIN, USER_LOGOUT } from './constants'
 
 export const userLogin = (payload) => ({
   type: USER_LOGIN,
-  payload,
+  payload
 });
 
 export const userLogout = () => ({
-  type: USER_LOGOUT,
+  type: USER_LOGOUT
 });
+

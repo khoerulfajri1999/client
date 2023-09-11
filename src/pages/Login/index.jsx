@@ -6,7 +6,7 @@ import * as yup from 'yup'
 import { useDispatch } from 'react-redux'
 import { loginUser } from '../../app/api/auth'
 import { userLogin } from '../../app/features/Auth/actions'
-import { useNavigate} from 'react-router'
+import { useHistory } from 'react-router'
 
 const schema = yup.object({
   email: yup.string().email('Email harus valid').required('Email harus diisi'),
@@ -26,7 +26,7 @@ export default function Login() {
   });
   const [status, setStatus] = React.useState(statusList.idle);
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const history = useHistory();
 
   const onSubmit = async formData => {
     setStatus(statusList.process);
@@ -37,7 +37,7 @@ export default function Login() {
     } else {
       const { user, token } = data;
       dispatch(userLogin({user, token}));
-      history('/');
+      history.push('/');
     }
     setStatus(statusList.success);
   }
@@ -72,7 +72,7 @@ export default function Login() {
               { errors.password?.message }
             </Form.Control.Feedback>
           </Form.Group>
-          <Button variant="primary" type="submit" disabled={status === statusList.process}>
+          <Button variant="danger" type="submit" disabled={status === statusList.process}>
             { status === statusList.process ? 'Memprosess...' : 'Login'}
           </Button>
         </Form>

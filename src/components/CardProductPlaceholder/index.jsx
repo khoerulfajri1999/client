@@ -19,7 +19,7 @@ export default function CardProductPlaceholder() {
         <Placeholder as={Card.Text} animation="glow">
           <Placeholder sm={8} />
         </Placeholder>
-        <Placeholder.Button variant="primary" xs={3}/>
+        <Placeholder.Button variant="danger" xs={3}/>
       </Card.Body>
     </Card>
   )

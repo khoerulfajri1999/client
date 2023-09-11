@@ -1,4 +1,4 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -10,8 +10,10 @@ const config = {
   contact: process.env.REACT_APP_CONTACT,
   billing: {
     account_no: process.env.REACT_APP_BILLING_NO,
-    bank_name: process.env.REACT_APP_BILLING_BANK,
-  },
-};
+    bank_name: process.env.REACT_APP_BILLING_BANK
+  }
+}
 
-export { config };
+export {
+  config
+}

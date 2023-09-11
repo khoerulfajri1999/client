@@ -21,7 +21,7 @@ export default function CardProduct({item, onAddToCart}) {
         <Card.Text>
           { formatRupiah(item.price) }
         </Card.Text>
-        <Button variant="primary" onClick={() => onAddToCart()}>
+        <Button variant="danger" onClick={() => onAddToCart()}>
           <FontAwesomeIcon icon={solid('cart-plus')} />
         </Button>
       </Card.Body>

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { Container, Form, FormControl, Nav, Navbar, Button, NavDropdown, InputGroup } from 'react-bootstrap'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
-import { LinkContainer } from 'react-router-bootstrap'
+import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap'
 import { getCategories } from '../../app/api/product'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCategory, setKeyword } from '../../app/features/Product/actions'
@@ -23,9 +23,9 @@ export default function TopBar() {
   return (
     <Navbar bg="danger" variant="dark" expand="lg" fixed="top">
       <Container>
-        <LinkContainer to="/" exact>
+        <IndexLinkContainer to="/" exact>
           <Navbar.Brand>POS</Navbar.Brand>
-        </LinkContainer>
+        </IndexLinkContainer>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto my-2 my-lg-0 mr-3">

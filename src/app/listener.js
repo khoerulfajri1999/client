@@ -9,18 +9,18 @@ const listener = () => {
   currentAuth = store.getState().auth;
   currentCart = store.getState().cart;
   const { token } = currentAuth;
-
-  if (currentAuth !== previousAuth) {
-    localStorage.setItem("auth", JSON.stringify(currentAuth));
+  
+  if(currentAuth !== previousAuth) {
+    localStorage.setItem('auth', JSON.stringify(currentAuth));
     saveCart(token, currentCart);
   }
 
-  if (currentCart !== previousCart) {
-    localStorage.setItem("cart", JSON.stringify(currentCart));
+  if(currentCart !== previousCart) {
+    localStorage.setItem('cart', JSON.stringify(currentCart));
     saveCart(token, currentCart);
   }
-};
+}
 
 export const listen = () => {
   store.subscribe(listener);
-};
+}

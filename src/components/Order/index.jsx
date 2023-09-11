@@ -6,7 +6,6 @@ import { Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 export default function Order() {
-  console.log('=>')
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     getOrders().then(({data: {data}}) => setOrders(data))

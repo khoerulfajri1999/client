@@ -7,14 +7,14 @@ import { config } from '../../config';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { addItem, removeItem } from '../../app/features/Cart/actions';
 import { formatRupiah, sumPrice } from '../../utils';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 export default function Cart() {
   const cart = useSelector(state => state.cart);
   const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const history = useHistory();
   
   const handlePlus = item => {
     dispatch(addItem(item));
@@ -40,11 +40,11 @@ export default function Cart() {
     {
       name: 'Qty',
       cell: row => (<div>
-        <Button variant="primary" size="sm" onClick={() => handleMinus(row)}>
+        <Button variant="danger" size="sm" onClick={() => handleMinus(row)}>
           <FontAwesomeIcon icon={solid('minus')}/>
         </Button>
         <span className="mx-4">{row.qty}</span>
-        <Button variant="primary" size="sm" onClick={() => handlePlus(row)}>
+        <Button variant="danger" size="sm" onClick={() => handlePlus(row)}>
           <FontAwesomeIcon icon={solid('plus')} />
         </Button>
         </div>),
@@ -69,7 +69,7 @@ export default function Cart() {
         <Card.Footer>
         <div className="d-grid gap-2">
           { cart.length > 0 && auth.user ? 
-          <Button variant="primary" size="md" onClick={_ => history('/checkout')}>
+          <Button variant="danger" size="md" onClick={_ => history.push('/checkout')}>
             Checkout
           </Button> : null
           }

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup' 
 import { registerUser } from '../../app/api/auth'
-import { useNavigate} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const schema = yup.object({
   full_name: yup.string().required('Nama Lengkap harus diisi'),
@@ -26,7 +26,7 @@ export default function Register() {
     resolver: yupResolver(schema)
   });
   const [status, setStatus] = React.useState(statusList.idle);
-  const history = useNavigate();
+  const history = useHistory();
 
   const onSubmit = async formData => {
     setStatus(statusList.process);
@@ -108,7 +108,7 @@ export default function Register() {
               </Form.Group>
             </Row>
 
-            <Button variant="primary" type="submit" disabled={status === statusList.process}>
+            <Button variant="danger" type="submit" disabled={status === statusList.process}>
               { status === statusList.process ? 'Memproses...' : 'Mendaftar'}
             </Button>
           </Form>

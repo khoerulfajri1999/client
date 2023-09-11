@@ -5,7 +5,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useForm } from 'react-hook-form'
 import CustomFormSelect from '../CustomFormSelect';
 import { createAddress } from '../../app/api/address';
-import { useNavigate } from 'react-router';
+import { useHistory } from 'react-router';
 
 const schema = yup.object({
   nama: yup.string().required('Nama alamat harus diisi'),
@@ -21,7 +21,7 @@ export default function AddAddress() {
     resolver: yupResolver(schema)
   });
   const [status, setStatus] = useState('idle');
-  const history = useNavigate();
+  const history = useHistory();
   const updateValue = (field, value) => setValue(field, value, {shouldValidate: true, shouldDirty: true});
   const allField = watch();
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, Container, Button } from 'react-bootstrap'
 import DataTable from 'react-data-table-component';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes, useNavigate } from 'react-router';
+import { Route, Switch, useHistory, useRouteMatch } from 'react-router';
 import { getAddress } from '../../app/api/address';
 import { createOrder } from '../../app/api/order';
 import { clearItem } from '../../app/features/Cart/actions';
@@ -12,7 +12,7 @@ import { formatRupiah, sumPrice } from '../../utils';
 const AddressData = ({setAddressData}) => {
   const [address, setAddress] = useState([]);
   const [notSelect, setNotSelect] = useState(true);
-  const history = useNavigate();
+  const history = useHistory();
   const handleChange = row => {
     if(row.selectedCount > 0) {
       setAddressData(row.selectedRows[0]);
@@ -45,13 +45,13 @@ const AddressData = ({setAddressData}) => {
       title="Pilih Alamat Pengiriman"
     />
     <div className="d-flex justify-content-end mt-3">
-      <Button variant="primary" size="sm" disabled={notSelect} onClick={_ => history('/checkout/confirm')}>Selanjutnya</Button>
+      <Button variant="danger" size="sm" disabled={notSelect} onClick={_ => history.push('/checkout/confirm')}>Selanjutnya</Button>
     </div>
   </>
 }
 
 const Confirmation = ({data, onClick}) => {
-  const history = useNavigate();
+  const history = useHistory();
   const cart = useSelector(state => state.cart);
   const confirm =[
     {
@@ -77,16 +77,17 @@ const Confirmation = ({data, onClick}) => {
       data={confirm}
     />
     <div className="d-flex justify-content-between mt-3">
-      <Button variant="primary" size="sm" onClick={_ => history('/checkout')}>Sebelumnya</Button>
+      <Button variant="danger" size="sm" onClick={_ => history.push('/checkout')}>Sebelumnya</Button>
       <Button variant="success" size="sm" onClick={onClick}>BAYAR</Button>
     </div>
   </>
 }
 
 export default function Checkout() {
+  const match = useRouteMatch();
   const [selectedAddress, setSelectedAddress] = useState({});
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const history = useHistory();
 
   const handleCreateOrder = async () => {
     let payload = {
@@ -97,7 +98,7 @@ export default function Checkout() {
     const { data } = await createOrder(payload);
     if(!data.error) {
       dispatch(clearItem());
-      history(`/invoices/${data._id}`);
+      history.push(`/invoices/${data._id}`);
     }
   }
 
@@ -108,10 +109,14 @@ export default function Checkout() {
           Checkout
         </Card.Header>
         <Card.Body>
-          <Routes>
-            <Route path="" element={<AddressData setAddressData={address => setSelectedAddress(address)}/>}exact />
-            <Route path="confirm" element={<Confirmation data={selectedAddress} onClick={handleCreateOrder}/>}exact />
-          </Routes>
+          <Switch>
+            <Route path={`${match.url}/`} exact>
+              <AddressData setAddressData={address => setSelectedAddress(address)}/>
+            </Route>
+            <Route path={`${match.url}/confirm`} exact>
+              <Confirmation data={selectedAddress} onClick={handleCreateOrder}/>
+            </Route>
+          </Switch>
         </Card.Body>
       </Card>
 

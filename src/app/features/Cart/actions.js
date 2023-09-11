@@ -5,22 +5,22 @@ export const addItem = (item) => ({
   payload: {
     item: {
       ...item,
-      product: item.product || item,
-    },
-  },
-});
+      product: item.product || item
+    }
+  }
+})
 
-export function removeItem(item) {
+export function removeItem(item){
   return {
-    type: REMOVE_ITEM,
+    type: REMOVE_ITEM, 
     payload: {
-      item: item,
-    },
-  };
+      item: item
+    }
+  }
 }
 
-export function clearItem() {
+export function clearItem(){
   return {
-    type: CLEAR_ITEM,
-  };
+    type: CLEAR_ITEM
+  }
 }
